@@ -1,11 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import axios from 'axios'
-import { GetServerSideProps } from 'next'
-import { Chart } from './components/Chart'
-import { COUNTRIES } from './constant/country'
+import { COUNTRIES } from '../src/constant/country'
 import { useState } from 'react'
-import { redirect } from 'next/dist/server/api-utils'
 import Link from 'next/link'
 
 
@@ -19,9 +15,6 @@ const Home: NextPage = (data) => {
 
   const handleChange = (e: any) => {
     setValue(e.target.value)
-  }
-
-  const handleSubmit = () => {
   }
 
   return (

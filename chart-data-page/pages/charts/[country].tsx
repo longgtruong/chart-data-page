@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { Chart } from '../components/Chart'
+import { Chart } from '../../src/components/Chart'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { data: apple } = await axios.get(`http://localhost:8080/apple-music/songs/${ctx.params?.country}`)

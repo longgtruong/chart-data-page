@@ -33,13 +33,11 @@ const Home: NextPage = (data) => {
             <option value={el.code} key={i}>{el.name}</option>
           ))}
         </select>
-        <Link href={`/charts/${value}`}>
-          <a className="bg-sky-500 mt-5 py-2 px-5 rounded-full text-white">
+          <a className="bg-sky-500 mt-5 py-2 px-5 rounded-full text-white" href={`/charts/${value}`}>
             <h1 className="text-m font-bold text-white">
               Get charts
             </h1>
           </a>
-        </Link>
       </main>
 
     </div>

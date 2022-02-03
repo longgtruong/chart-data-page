@@ -6,13 +6,13 @@ import { useState } from 'react'
 import { Chart } from '../../src/components/Chart'
 import { COUNTRIES } from '../../src/constant/country'
 
-const HOST = "https://chart-data-tools.vercel.app/"
-// const HOST = "http://localhost:8080/"
+const HOST = "https://chart-data-tools.vercel.app"
+// const HOST = "http://localhost:8080"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const { data: apple } = await axios.get(`${HOST}${ctx.params?.country}`)
-    const { data: itunes } = await axios.get(`${HOST}${ctx.params?.country}`)
-    const { data: spotify } = await axios.get(`${HOST}${ctx.params?.country}`)
+    const { data: apple } = await axios.get(`${HOST}/apple-music/songs/${ctx.params?.country}`)
+    const { data: itunes } = await axios.get(`${HOST}/itunes/songs/${ctx.params?.country}`)
+    const { data: spotify } = await axios.get(`${HOST}/spotify/${ctx.params?.country}`)
     return {
         props: {
             apple,
@@ -24,39 +24,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 function Charts({ apple, itunes, spotify }: any) {
 
-    const getInitialState = () => {
-        const value = "us"
-        return value;
-      };
-    
-      const [value, setValue] = useState(getInitialState)
-    
-      const handleChange = (e: any) => {
-        setValue(e.target.value)
-      }
-    
-
     const { query } = useRouter();
-    console.log(spotify)
     return (
-        <div className="content">
-            <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-                <h1 className="text-6xl font-bold text-white mb-5">
-                    Charts around the world
-        </h1>
-                <select value={value} onChange={handleChange}>
-                    {COUNTRIES.map((el, i) => (
-                        <option value={el.code} key={i}>{el.name}</option>
-                    ))}
-                </select>
-                <Link href={`/charts/${value}`}>
-                    <a className="bg-sky-500 mt-5 py-2 px-5 rounded-full text-white">
-                        <h1 className="text-m font-bold text-white">
-                            Get charts
-            </h1>
-                    </a>
-                </Link>
-            </main>
+        <div className="content mt-5">
+            <a className="text-blue-400	py-2 px-14 text-white flex items-center" href="/">
+                <svg className="svg-icon mr-2" viewBox="0 0 20 20">
+                    <path fill="none" d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+                </svg>
+                Go back
+                </a>
             <div className="charts flex flex-wrap lg:m-10 sm:m-5">
                 <div className="mt-6 w-92 flex-1 m-5">
                     <h1 className="text-xl text-white font-bold">Apple Music {query.country?.toString().toUpperCase()}</h1>
@@ -71,7 +47,6 @@ function Charts({ apple, itunes, spotify }: any) {
                     <Chart data={itunes} />
                 </div>
             </div>
-
 
         </div>
     )

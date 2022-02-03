@@ -7,8 +7,8 @@ import { useState } from 'react'
 import { Chart } from '../../src/components/Chart'
 import { COUNTRIES } from '../../src/constant/country'
 
-const HOST = "https://chart-data-tools.vercel.app"
-// const HOST = "http://localhost:8080"
+// const HOST = "https://chart-data-tools.vercel.app"
+const HOST = "http://localhost:8080"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { data: apple } = await axios.get(`${HOST}/apple-music/songs/${ctx.params?.country}`)
@@ -41,18 +41,21 @@ function Charts({ apple, itunes, spotify }: any) {
                 </a>
             </Link>
             <div className="charts flex flex-wrap lg:m-10 sm:m-5">
-                <div className="mt-6 w-92 flex-1 m-5">
+                {apple.length && <div className="mt-6 w-92 flex-1 m-5">
                     <h1 className="text-xl text-white font-bold">Apple Music {query.country?.toString().toUpperCase()}</h1>
                     <Chart data={apple} />
-                </div>
-                <div className="mt-6 w-92 flex-1 m-5">
-                    <h1 className="text-xl text-white font-bold">Spotify {query.country?.toString().toUpperCase()}</h1>
-                    <Chart data={spotify} />
-                </div>
-                <div className="mt-6 w-92 flex-1 m-5">
+                </div>}
+                {spotify.length &&
+                    <div className="mt-6 w-92 flex-1 m-5">
+                        <h1 className="text-xl text-white font-bold">Spotify {query.country?.toString().toUpperCase()}</h1>
+                        <Chart data={spotify} />
+                    </div>
+                }
+                {itunes.length && <div className="mt-6 w-92 flex-1 m-5">
                     <h1 className="text-xl text-white font-bold">iTunes {query.country?.toString().toUpperCase()}</h1>
                     <Chart data={itunes} />
                 </div>
+                }
             </div>
 
         </div>

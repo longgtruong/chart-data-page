@@ -3,12 +3,10 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import { Chart } from '../../src/components/Chart'
-import { COUNTRIES } from '../../src/constant/country'
 
-// const HOST = "https://chart-data-tools.vercel.app"
-const HOST = "http://localhost:8080"
+const HOST = "https://chart-data-tools.vercel.app"
+// const HOST = "http://localhost:8080"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { data: apple } = await axios.get(`${HOST}/apple-music/songs/${ctx.params?.country}`)

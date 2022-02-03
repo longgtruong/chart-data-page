@@ -26,9 +26,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 function Charts({ apple, itunes, spotify }: any) {
 
     const { query } = useRouter();
-    const country : string | string[] = query.country!
+    const country: string | string[] = query.country!
     const emoji = countryCodeEmoji(country.toString())
-    const countryName = COUNTRIES.filter((el)=>el.code==country)[0].name
+    const countryName = COUNTRIES.filter((el) => el.code == country)[0].name
 
     return (
         <div className="content mt-5">
@@ -48,17 +48,26 @@ function Charts({ apple, itunes, spotify }: any) {
             <div className="charts flex flex-wrap lg:m-10 sm:m-5">
                 {apple.length ? <div className="mt-6 w-92 flex-1 m-5">
                     <h1 className="text-xl text-white font-bold">Apple Music {countryName} {emoji}</h1>
-                    <Chart data={apple} />
+                    <Chart data={apple} platform="Apple Music" country={{
+                        name: countryName,
+                        emoji: emoji
+                    }} />
                 </div> : null}
                 {spotify.length ?
                     <div className="mt-6 w-92 flex-1 m-5">
                         <h1 className="text-xl text-white font-bold">Spotify {countryName} {emoji}</h1>
-                        <Chart data={spotify} />
+                        <Chart data={spotify} platform="Spotify" country={{
+                            name: countryName,
+                            emoji: emoji
+                        }} />
                     </div> : null
                 }
                 {itunes.length ? <div className="mt-6 w-92 flex-1 m-5">
                     <h1 className="text-xl text-white font-bold">iTunes {countryName} {emoji}</h1>
-                    <Chart data={itunes} />
+                    <Chart data={itunes} platform="iTunes" country={{
+                        name: countryName,
+                        emoji: emoji
+                    }} />
                 </div> : null
                 }
             </div>

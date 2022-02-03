@@ -1,14 +1,16 @@
 import { ChartItem } from "./ChartItem"
 
 type Props = {
-    data: []
+    data: [],
+    platform: string
+    country: any
 }
 
-export const Chart = ({data}: Props) => {
+export const Chart = ({ data, platform, country }: Props) => {
     return (
         <div>
-            {data.map((el, i)=>(
-                <ChartItem chartObject={el} key={i}/>
+            {data.map((el, i) => (
+                <ChartItem chartObject={el} key={i} platform={platform} country={country} />
             ))}
         </div>
     )

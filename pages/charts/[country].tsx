@@ -4,6 +4,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Chart } from '../../src/components/Chart'
+import { countryCodeEmoji } from 'country-code-emoji'
+import { COUNTRIES } from '../../src/constant/country'
 
 const HOST = "https://chart-data-tools.vercel.app"
 // const HOST = "http://localhost:8080"
@@ -24,11 +26,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 function Charts({ apple, itunes, spotify }: any) {
 
     const { query } = useRouter();
+    const country : string | string[] = query.country!
+    const emoji = countryCodeEmoji(country.toString())
+    const countryName = COUNTRIES.filter((el)=>el.code==country)[0].name
+
     return (
         <div className="content mt-5">
             <Head>
-                <title>{query.country?.toString().toUpperCase()} Charts</title>
+                <title>{emoji} {query.country?.toString().toUpperCase()} Charts</title>
                 <link rel="icon" href="/favicon.ico" />
+                <meta charSet="utf-8" />
             </Head>
             <Link href="/">
                 <a className="text-blue-400	py-2 px-14 text-white flex items-center" >
@@ -39,20 +46,20 @@ function Charts({ apple, itunes, spotify }: any) {
                 </a>
             </Link>
             <div className="charts flex flex-wrap lg:m-10 sm:m-5">
-                {apple.length && <div className="mt-6 w-92 flex-1 m-5">
-                    <h1 className="text-xl text-white font-bold">Apple Music {query.country?.toString().toUpperCase()}</h1>
+                {apple.length ? <div className="mt-6 w-92 flex-1 m-5">
+                    <h1 className="text-xl text-white font-bold">Apple Music {countryName} {emoji}</h1>
                     <Chart data={apple} />
-                </div>}
-                {spotify.length &&
+                </div> : null}
+                {spotify.length ?
                     <div className="mt-6 w-92 flex-1 m-5">
-                        <h1 className="text-xl text-white font-bold">Spotify {query.country?.toString().toUpperCase()}</h1>
+                        <h1 className="text-xl text-white font-bold">Spotify {countryName} {emoji}</h1>
                         <Chart data={spotify} />
-                    </div>
+                    </div> : null
                 }
-                {itunes.length && <div className="mt-6 w-92 flex-1 m-5">
-                    <h1 className="text-xl text-white font-bold">iTunes {query.country?.toString().toUpperCase()}</h1>
+                {itunes.length ? <div className="mt-6 w-92 flex-1 m-5">
+                    <h1 className="text-xl text-white font-bold">iTunes {countryName} {emoji}</h1>
                     <Chart data={itunes} />
-                </div>
+                </div> : null
                 }
             </div>
 

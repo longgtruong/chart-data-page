@@ -5,7 +5,7 @@ import { Chart } from '../../src/components/Chart'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const { data: apple } = await axios.get(`https://chart-data-tools.vercel.app/apple-music/songs/${ctx.params?.country}`)
-    const { data: itunes } = await axios.get(`https://chart-data-tools.vercel.app/itunes/${ctx.params?.country}`)
+    const { data: itunes } = await axios.get(`https://chart-data-tools.vercel.app/itunes/songs/${ctx.params?.country}`)
     return {
         props: {
             apple,

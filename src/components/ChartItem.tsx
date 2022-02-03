@@ -16,7 +16,7 @@ export const ChartItem = ({ chartObject }: Props) => {
             <div className="w-16 h-16">
                 <img className="rounded-full shadow-sm" src={image} />
             </div>
-            <div className="text-l  font-bold m-2">{rank}</div>
+            <div className="text-l font-bold m-2">{rank}</div>
             <div className="title ml-2">
                 <div className="text-l font-bold info">{title}</div>
                 <div className="text-l text-ellipsis overflow-hidden info">{artist}</div>

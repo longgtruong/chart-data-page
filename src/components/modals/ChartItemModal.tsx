@@ -67,22 +67,23 @@ export const ChartItemModal = ({ country, platform, chartObject, isOpen, handleC
                                     {platform} {country.name} {country.emoji}
                                 </Dialog.Title>
                                 <div className="mt-2">
-                                    <div className="chart-item text-left text-stone-600	 flex mt-2 bg-slate-100 hover:bg-sky-400/50 hover:text-white duration-200 ease-in-out p-2 rounded-md items-center">
-                                        <div className="text-xl font-bold my-2 mx-4">{chartObject.rank}</div>
-                                        {chartObject.streams ? <div className="title ml-2">
-                                            <div className="text-l font-bold info">{chartObject.title}</div>
-                                            <div className="text-l text-ellipsis overflow-hidden info">{chartObject.artist}</div>
-                                            <div className="text-l font-bold info">{chartObject.streams} streams</div>
-                                        </div>
-                                            : <div className="title ml-2 lg:my-3">
+                                    <a href={chartObject.link}>
+                                        <div className="chart-item text-left text-stone-600	 flex mt-2 bg-slate-100 hover:bg-sky-400/50 hover:text-white duration-200 ease-in-out p-2 rounded-md items-center">
+                                            <div className="text-xl font-bold my-2 mx-4">{chartObject.rank}</div>
+                                            {chartObject.streams ? <div className="title ml-2">
                                                 <div className="text-l font-bold info">{chartObject.title}</div>
                                                 <div className="text-l text-ellipsis overflow-hidden info">{chartObject.artist}</div>
+                                                <div className="text-l font-bold info">{chartObject.streams} streams</div>
                                             </div>
-                                        }
-                                    </div>
+                                                : <div className="title ml-2 lg:my-3">
+                                                    <div className="text-l font-bold info">{chartObject.title}</div>
+                                                    <div className="text-l text-ellipsis overflow-hidden info">{chartObject.artist}</div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </a>
                                 </div>
-
-                                <div className="mt-4 flex">
+                                <div className="mt-4">
                                     <button
                                         type="button"
                                         className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
@@ -90,13 +91,6 @@ export const ChartItemModal = ({ country, platform, chartObject, isOpen, handleC
                                     >
                                         Share
                                 </button>
-                                    <a
-                                        type="button"
-                                        className="ml-5 inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                                        href={chartObject.link}
-                                    >
-                                        Play / Buy
-                                </a>
 
                                 </div>
                             </div>

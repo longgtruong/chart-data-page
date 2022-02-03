@@ -4,8 +4,8 @@ import { useRouter } from 'next/router'
 import { Chart } from '../../src/components/Chart'
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const { data: apple } = await axios.get(`http://localhost:8080/apple-music/songs/${ctx.params?.country}`)
-    const { data: itunes } = await axios.get(`http://localhost:8080/itunes/songs/${ctx.params?.country}`)
+    const { data: apple } = await axios.get(`https://chart-data-tools.vercel.app/apple-music/songs/${ctx.params?.country}`)
+    const { data: itunes } = await axios.get(`https://chart-data-tools.vercel.app/itunes/${ctx.params?.country}`)
     return {
         props: {
             apple,
